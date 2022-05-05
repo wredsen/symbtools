@@ -502,7 +502,7 @@ class DAE_System(object):
         u_zero = np.zeros((len(self.mod.tau)))
 
         # noinspection PyUnusedLocal
-        def input_func(t):
+        def input_func(yy, t):
             return u_zero
 
         self.input_func = input_func
@@ -572,7 +572,7 @@ class DAE_System(object):
             """
 
             # to use a controller, this needs to be more sophisticated
-            external_forces = self.input_func(t)
+            external_forces = self.input_func(yy, t)
             args = np.concatenate((yy, yyd, external_forces))
 
             ttheta = yy[:ntt]
@@ -880,7 +880,7 @@ class DAE_System(object):
 
         assert xx.shape == (2*ntt,)
 
-        external_forces = self.input_func(t)
+        external_forces = self.input_func(xx, t)
 
         self.gen_leqs_for_acc_llmd()
         A, b = self.leqs_acc_lmd_func(*np.r_[xx, external_forces])

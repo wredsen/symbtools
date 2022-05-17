@@ -3560,8 +3560,8 @@ def expr_to_func(args, expr, modules='numpy', **kwargs):
         funcs = []
         for e in new_expr:
             func_i = sp.lambdify(args, e, modules, printer, use_imps)
-            func_iv = np.vectorize(func_i, otypes=[float])
-            funcs.append(func_iv)
+            #func_iv = np.vectorize(func_i, otypes=[float])
+            funcs.append(func_i)
 
         def func2(*allargs):
             # each result should be a 1d- array
